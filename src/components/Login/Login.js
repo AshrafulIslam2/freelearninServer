@@ -1,9 +1,11 @@
 import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContexts } from "../UserContext/UserContext";
 
 const Login = () => {
   const { loginUser, GoogleLogin } = useContext(AuthContexts);
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/home";
   const [erorr, SetErorr] = useState("");
   const navigate = useNavigate();
   const getLoginData = (event) => {
@@ -16,7 +18,7 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
-        navigate("/home");
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         SetErorr(error.message);
@@ -28,7 +30,7 @@ const Login = () => {
         // The signed-in user info.
         const user = result.user;
         console.log(user);
-        navigate("/home");
+        navigate(from, { replace: true });
         // ...
       })
       .catch((error) => {

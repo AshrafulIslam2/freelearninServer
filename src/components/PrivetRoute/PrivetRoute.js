@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { AuthContexts } from "../UserContext/UserContext";
 
 const PrivetRoute = ({ children }) => {
   const { Duser, loder } = useContext(AuthContexts);
+  const location = useLocation();
   if (loder) {
     return (
       <div>
@@ -16,7 +17,7 @@ const PrivetRoute = ({ children }) => {
   }
   return (
     <div>
-      <Navigate to="/login"></Navigate>
+      <Navigate to="/login" state={{ from: location }} replace></Navigate>
     </div>
   );
 };

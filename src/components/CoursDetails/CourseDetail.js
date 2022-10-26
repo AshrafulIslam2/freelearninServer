@@ -5,7 +5,8 @@ import { jsPDF } from "jspdf";
 
 const CourseDetail = () => {
   const coursesDetails = useLoaderData();
-  const { instructor, rating } = coursesDetails;
+  console.log(coursesDetails);
+  const { instructor, rating, coursesid } = coursesDetails;
   const PdfDownloder = (name, pname) => {
     console.log();
     const doc = new jsPDF();
@@ -90,7 +91,7 @@ const CourseDetail = () => {
           <div className="flex bg-gray-600 py-3 px-2  rounded-b ">
             <div className="mx-1">
               <button className="bg-pink-600 text-white  py-2 px-1  rounded-xl font-bold">
-                <Link to="/checkout">এখনি ভর্তি হোন</Link>
+                <Link to={`/checkout/${coursesid}`}>এখনি ভর্তি হোন</Link>
               </button>
             </div>
             <div>

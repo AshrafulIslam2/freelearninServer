@@ -46,12 +46,14 @@ export const router = createBrowserRouter([
         element: <Blog></Blog>,
       },
       {
-        path: "/checkout",
+        path: "/checkout/:id",
         element: (
           <PrivetRoute>
             <Cheackout></Cheackout>
           </PrivetRoute>
         ),
+        loader: ({ params }) =>
+          fetch(`https://freelearning.vercel.app/courses/${params.id}`),
       },
       {
         path: "/register",
