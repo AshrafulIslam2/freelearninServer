@@ -1,7 +1,60 @@
-import React from "react";
+import React, { createContext, useEffect, useState } from "react";
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  GoogleAuthProvider,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  signOut,
+} from "firebase/auth";
+import app from "../../firebase/firebase.config";
 
-const UserContext = () => {
-  return <div>This User Context</div>;
+export const AuthContexts = createContext();
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+
+const Usercontexts = ({ children }) => {
+  const [Duser, SetUser] = useState();
+  const [loder, setloader] = useState(true);
+  const user = { displayName: "ashraful" };
+  const creatuser = (email, password) => {
+    return createUserWithEmailAndPassword(auth, email, password);
+  };
+  const loginUser = (email, password) =>
+    signInWithEmailAndPassword(auth, email, password);
+
+  const GoogleLogin = () => {
+    return signInWithPopup(auth, provider);
+  };
+
+  const logOut = () => {
+    return signOut(auth);
+  };
+
+  useEffect(() => {
+    const unsuscribe = onAuthStateChanged(auth, (currentUser) => {
+      SetUser(currentUser);
+      console.log("auth State change", currentUser);
+      setloader(false);
+    });
+    return () => {
+      unsuscribe();
+    };
+  }, []);
+
+  const authinfo = {
+    user,
+    creatuser,
+    loginUser,
+    Duser,
+    GoogleLogin,
+    logOut,
+    loder,
+  };
+  return (
+    <AuthContexts.Provider value={authinfo}>{children}</AuthContexts.Provider>
+  );
 };
 
-export default UserContext;
+export default Usercontexts;

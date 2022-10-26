@@ -1,14 +1,49 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContexts } from "../UserContext/UserContext";
 
 const Registration = () => {
+  const { creatuser, GoogleLogin } = useContext(AuthContexts);
+  const userSet = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    const displayName = form.name.value;
+    creatuser(email, password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+      });
+    console.log(email, password, displayName);
+  };
+  const GoogleHandler = () => {
+    GoogleLogin()
+      .then((result) => {
+        // The signed-in user info.
+        const user = result.user;
+        console.log(user);
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+      });
+  };
   return (
     <div>
-      <section className="p-6 bg-gray-800 text-gray-50">
+      <section className="p-6 bg-gray-800 text-gray-50 w-8/12 mx-auto">
         <form
           novalidate=""
           action=""
           className="container flex flex-col mx-auto space-y-12 ng-untouched ng-pristine ng-valid"
+          onSubmit={userSet}
         >
           <fieldset className="grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm bg-gray-900">
             <div className="space-y-2 col-span-full lg:col-span-1">
@@ -26,6 +61,7 @@ const Registration = () => {
                 <input
                   id="firstname"
                   type="text"
+                  name="name"
                   placeholder="First name"
                   className="w-full rounded-md focus:ring focus:ring-opacity-75 focus:ring-violet-400 border-gray-700 text-gray-900"
                 />
@@ -36,6 +72,7 @@ const Registration = () => {
                 </label>
                 <input
                   id="email"
+                  name="email"
                   type="email"
                   placeholder="Email"
                   className="w-full rounded-md focus:ring focus:ring-opacity-75 focus:ring-violet-400 border-gray-700 text-gray-900"
@@ -47,7 +84,8 @@ const Registration = () => {
                 </label>
                 <input
                   id="city"
-                  type="text"
+                  type="password"
+                  name="password"
                   placeholder=""
                   className="w-full rounded-md focus:ring focus:ring-opacity-75 focus:ring-violet-400 border-gray-700 text-gray-900"
                 />
@@ -57,9 +95,9 @@ const Registration = () => {
                   Conifirm Password
                 </label>
                 <input
-                  id="state"
-                  type="text"
+                  type="password"
                   placeholder=""
+                  name="confirmpassword"
                   className="w-full rounded-md focus:ring focus:ring-opacity-75 focus:ring-violet-400 border-gray-700 text-gray-900"
                 />
               </div>
@@ -77,7 +115,11 @@ const Registration = () => {
             </div>
           </fieldset>
           <div className="flex justify-center space-x-4">
-            <button aria-label="Log in with Google" className="p-3 rounded-sm">
+            <button
+              aria-label="Log in with Google"
+              className="p-3 rounded-sm"
+              onClick={GoogleHandler}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 32 32"
@@ -97,13 +139,13 @@ const Registration = () => {
             </button>
           </div>
           <button
-            type="button"
+            type="submit"
             className="px-4 py-2 border rounded-md border-gray-100"
           >
             Register
           </button>
           <span>
-            All Ready Have Acount <Link to="/login">Please Login</Link>
+            All ready have an account? <Link to="/login">Please Login</Link>
           </span>
         </form>
       </section>

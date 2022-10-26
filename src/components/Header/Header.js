@@ -1,53 +1,93 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { FaAngellist } from "react-icons/fa";
+import { AuthContexts } from "../UserContext/UserContext";
 
 const Header = () => {
-  const links = [
-    { name: "home" },
-    { name: "courses" },
-    { name: "faq" },
-    { name: "blogs" },
-  ];
+  const { Duser, logOut } = useContext(AuthContexts);
+  console.log(Duser);
+  const logoutHandeler = () => {
+    logOut()
+      .then(() => {
+        // Sign-out successful.
+      })
+      .catch((error) => {
+        // An error happened.
+      });
+  };
   return (
     <div>
-      <nav className="flex justify-between h-[80px] items-center">
-        <div className="flex">
-          <FaAngellist className="text-purple-400 font-mono font-bold text-2xl" />
-          <a
-            href="http://"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mr-2 text-purple-400 font-mono font-bold"
-          >
-            Free Learning
-          </a>
-
-          <ul>
-            {links.map((link) => (
-              <Link className="pr-3" to={link.name}>
-                {link.name.toUpperCase()}
-              </Link>
-            ))}
-          </ul>
+      <div className="navbar bg-base-100">
+        <div className="navbar-start">
+          <div className="dropdown">
+            <label tabIndex={0} className="btn btn-ghost btn-circle">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h16M4 18h7"
+                />
+              </svg>
+            </label>
+            <ul
+              tabIndex={0}
+              className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+            >
+              <li>
+                <Link to="/home">Home</Link>
+              </li>
+              <li>
+                <Link to="/courses">Courses</Link>
+              </li>
+              <li>
+                <Link to="/blogs">Blog</Link>
+              </li>
+            </ul>
+          </div>
         </div>
-        <div className="mx-3 flex justify-center items-center ">
-          <Link to="/login" className="mr-3">
-            Login
+        <div className="navbar-center">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 32 32"
+            fill="currentColor"
+            className="flex-shrink-0 w-5 h-5 rounded-full dark:text-gray-900"
+          >
+            <path d="M18.266 26.068l7.839-7.854 4.469 4.479c1.859 1.859 1.859 4.875 0 6.734l-1.104 1.104c-1.859 1.865-4.875 1.865-6.734 0zM30.563 2.531l-1.109-1.104c-1.859-1.859-4.875-1.859-6.734 0l-6.719 6.734-6.734-6.734c-1.859-1.859-4.875-1.859-6.734 0l-1.104 1.104c-1.859 1.859-1.859 4.875 0 6.734l6.734 6.734-6.734 6.734c-1.859 1.859-1.859 4.875 0 6.734l1.104 1.104c1.859 1.859 4.875 1.859 6.734 0l21.307-21.307c1.859-1.859 1.859-4.875 0-6.734z"></path>
+          </svg>
+          <Link className="btn btn-ghost normal-case text-xl ">
+            Free Learning
           </Link>
-          <Link to="/register" className="mr-3">
-            Register
-          </Link>
-          <h1 className="mr-3"> Ashraful Islam</h1>
+        </div>
+        <div className="navbar-end">
+          {Duser?.email ? (
+            <button className="btn btn-ghost btn-circle mr-2">
+              <Link to="/login" onClick={logoutHandeler}>
+                Logout
+              </Link>
+            </button>
+          ) : (
+            <button className="btn btn-ghost btn-circle mr-2">
+              <Link to="/login">Login</Link>
+            </button>
+          )}
+          <button className="btn btn-ghost btn-circle  mr-3">
+            <Link to="/register">Register</Link>
+          </button>
           <img
-            src="https://imgv3.fotor.com/images/blog-richtext-image/10-profile-picture-ideas-to-make-you-stand-out.jpg"
-            width={100}
-            className="rounded-full"
+            src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+            width={20}
+            className="rounded-full  mr-2"
             alt=""
             srcset=""
           />
         </div>
-      </nav>
+      </div>
     </div>
   );
 };

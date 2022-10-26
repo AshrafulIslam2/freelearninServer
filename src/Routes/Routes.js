@@ -1,4 +1,5 @@
 import Login from "../components/Login/Login";
+import PrivetRoute from "../components/PrivetRoute/PrivetRoute";
 import Registration from "../components/Registration/Registration";
 
 const { createBrowserRouter } = require("react-router-dom");
@@ -22,11 +23,18 @@ export const router = createBrowserRouter([
       },
       {
         path: "/courses",
-        element: <Courses></Courses>,
+        element: (
+          <PrivetRoute>
+            <Courses></Courses>
+          </PrivetRoute>
+        ),
+        loader: () => fetch("https://freelearning.vercel.app/courses"),
       },
       {
         path: "/courses/:id",
         element: <CourseDetail></CourseDetail>,
+        loader: ({ params }) =>
+          fetch(`https://freelearning.vercel.app/courses/${params.id}`),
       },
       {
         path: "/blogs",

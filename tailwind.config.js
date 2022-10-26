@@ -34,5 +34,5 @@ module.exports = {
       stone: colors.stone,
     },
   },
-  plugins: [],
+  plugins: [require("daisyui")],
 };
