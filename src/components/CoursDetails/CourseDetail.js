@@ -46,11 +46,11 @@ const CourseDetail = () => {
         </div>
       </div>
       <div className="col-span-4  flex justify-center  ">
-        <div className="  px-2 ">
-          <h1 className="text-2xl bg-blue-500 px-2 pt-3 mt-3 rounded-t text-white font-bold">
+        <div className="px-2">
+          <h1 className="text-2xl bg-gray-600 px-2 pt-3 mt-3 rounded-t text-white font-bold">
             এই কোর্সের ভেতরে যা যা রয়েছে
           </h1>
-          <div className="grid  bg-blue-500  text-blue-50  tracking-widest leading-loose font-extrlight  px-3 py-4 lg:grid-cols-2  ">
+          <div className="grid  bg-gray-600 text-blue-50  tracking-widest leading-loose font-extrlight  px-3 py-4 lg:grid-cols-2  ">
             <div>
               <h1>Approx. 10 Hours</h1>
             </div>
@@ -76,11 +76,11 @@ const CourseDetail = () => {
               <h1>Course Certificate</h1>
             </div>
           </div>
-          <div className="bg-blue-500 flex py-3 justify-center text-white font-bold font-mono lg:text-2xl">
+          <div className="bg-gray-600 flex py-3 justify-center text-white font-bold font-mono lg:text-2xl">
             <h1>কোর্সের মূল্য</h1>
             <h1>৳ ১,২০০</h1>
           </div>
-          <div className="flex bg-blue-500 py-3 px-2  rounded-b ">
+          <div className="flex bg-gray-600 py-3 px-2  rounded-b ">
             <div className="mx-1">
               <button className="bg-pink-600 text-white  py-2 px-1  rounded-xl font-bold">
                 <Link to="/checkout">এখনি ভর্তি হোন</Link>

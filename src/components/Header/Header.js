@@ -66,7 +66,7 @@ const Header = () => {
         </div>
         <div className="navbar-end">
           {Duser?.email ? (
-            <button className="btn btn-ghost btn-circle mr-2">
+            <button className="btn btn-ghost btn-circle mr-4">
               <Link to="/login" onClick={logoutHandeler}>
                 Logout
               </Link>
@@ -79,13 +79,27 @@ const Header = () => {
           <button className="btn btn-ghost btn-circle  mr-3">
             <Link to="/register">Register</Link>
           </button>
-          <img
-            src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
-            width={20}
-            className="rounded-full  mr-2"
-            alt=""
-            srcset=""
-          />
+          <Link to="/profile">
+            {Duser?.photoURL ? (
+              <>
+                <img
+                  src={Duser?.photoURL}
+                  alt=""
+                  className="rounded-full"
+                  width={20}
+                  srcset=""
+                />
+              </>
+            ) : (
+              <img
+                src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+                width={20}
+                className="rounded-full mr-2"
+                alt=""
+                srcset=""
+              />
+            )}
+          </Link>
         </div>
       </div>
     </div>

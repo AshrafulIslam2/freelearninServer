@@ -1,6 +1,7 @@
 import Login from "../components/Login/Login";
 import PrivetRoute from "../components/PrivetRoute/PrivetRoute";
 import Registration from "../components/Registration/Registration";
+import Profile from "../profile/Profile";
 
 const { createBrowserRouter } = require("react-router-dom");
 const { default: Blog } = require("../components/Blogs/Blog");
@@ -17,6 +18,10 @@ export const router = createBrowserRouter([
     path: "/",
     element: <Mains></Mains>,
     children: [
+      {
+        path: "/",
+        element: <Home></Home>,
+      },
       {
         path: "/home",
         element: <Home></Home>,
@@ -55,6 +60,14 @@ export const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login></Login>,
+      },
+      {
+        path: "/profile",
+        element: (
+          <PrivetRoute>
+            <Profile></Profile>
+          </PrivetRoute>
+        ),
       },
     ],
   },

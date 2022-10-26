@@ -1,9 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContexts } from "../UserContext/UserContext";
 
 const Registration = () => {
   const { creatuser, GoogleLogin } = useContext(AuthContexts);
+  const [erorr, SetErorr] = useState("");
   const userSet = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -16,9 +17,7 @@ const Registration = () => {
         console.log(user);
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
+        SetErorr(error.message);
       });
     console.log(email, password, displayName);
   };
@@ -31,9 +30,7 @@ const Registration = () => {
         // ...
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
+        SetErorr(error.message);
       });
   };
   return (
@@ -144,10 +141,11 @@ const Registration = () => {
           >
             Register
           </button>
-          <span>
+          <span className="text-center">
             All ready have an account? <Link to="/login">Please Login</Link>
           </span>
         </form>
+        <h1 className="text-red-600 text-center">{erorr}</h1>
       </section>
     </div>
   );

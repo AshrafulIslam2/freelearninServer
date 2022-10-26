@@ -4,7 +4,7 @@ import { AuthContexts } from "../UserContext/UserContext";
 
 const Login = () => {
   const { loginUser, GoogleLogin } = useContext(AuthContexts);
-  const [loginSuccess, SetLoginSucc] = useState(false);
+  const [erorr, SetErorr] = useState("");
   const navigate = useNavigate();
   const getLoginData = (event) => {
     event.preventDefault();
@@ -16,13 +16,10 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
-        SetLoginSucc(true);
         navigate("/home");
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
+        SetErorr(error.message);
       });
   };
   const GoogleHandler = () => {
@@ -35,9 +32,7 @@ const Login = () => {
         // ...
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console(errorCode, errorMessage);
+        SetErorr(error.message);
       });
   };
   return (
@@ -118,6 +113,7 @@ const Login = () => {
           Don't have an account?
           <Link to="/register">Sign Up</Link>
         </p>
+        <h1 className="text-red-600">{erorr}</h1>
       </div>
     </div>
   );
