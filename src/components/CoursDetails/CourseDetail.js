@@ -1,10 +1,17 @@
 import React from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import { FaChild, FaDisease } from "react-icons/fa";
+import { jsPDF } from "jspdf";
 
 const CourseDetail = () => {
   const coursesDetails = useLoaderData();
   const { instructor, rating } = coursesDetails;
+  const PdfDownloder = (name, date, pname) => {
+    console.log();
+    const doc = new jsPDF();
+    doc.text(` course name :${name} Publisher Name: ${pname}  `, 10, 10);
+    doc.save("course.pdf");
+  };
   return (
     <div className="grid lg:grid-cols-12 bg-slate-100 ">
       <div className="col-span-7 ">
@@ -87,7 +94,16 @@ const CourseDetail = () => {
               </button>
             </div>
             <div>
-              <button className="bg-pink-600 text-white  py-2 px-1 rounded-xl font-semibold">
+              <button
+                className="bg-pink-600 text-white  py-2 px-1 rounded-xl font-semibold"
+                onClick={() => {
+                  PdfDownloder(
+                    coursesDetails.title,
+                    instructor.name,
+                    instructor.published_date
+                  );
+                }}
+              >
                 কোর্স ডিটেইল ডাউনলোড করুন
               </button>
             </div>
