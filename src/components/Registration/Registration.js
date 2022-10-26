@@ -1,8 +1,10 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 import { AuthContexts } from "../UserContext/UserContext";
 
 const Registration = () => {
+  const navigate = useNavigate();
   const { creatuser, GoogleLogin } = useContext(AuthContexts);
   const [erorr, SetErorr] = useState("");
   const userSet = (event) => {
@@ -15,6 +17,7 @@ const Registration = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
+        navigate("/home");
       })
       .catch((error) => {
         SetErorr(error.message);
