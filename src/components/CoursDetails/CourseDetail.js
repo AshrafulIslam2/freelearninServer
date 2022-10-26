@@ -6,7 +6,7 @@ import { jsPDF } from "jspdf";
 const CourseDetail = () => {
   const coursesDetails = useLoaderData();
   const { instructor, rating } = coursesDetails;
-  const PdfDownloder = (name, date, pname) => {
+  const PdfDownloder = (name, pname) => {
     console.log();
     const doc = new jsPDF();
     doc.text(` course name :${name} Publisher Name: ${pname}  `, 10, 10);
