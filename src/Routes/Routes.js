@@ -28,16 +28,16 @@ export const router = createBrowserRouter([
       },
       {
         path: "/courses",
-        element: (
-          <PrivetRoute>
-            <Courses></Courses>
-          </PrivetRoute>
-        ),
+        element: <Courses></Courses>,
         loader: () => fetch("https://freelearning.vercel.app/courses"),
       },
       {
         path: "/courses/:id",
-        element: <CourseDetail></CourseDetail>,
+        element: (
+          <PrivetRoute>
+            <CourseDetail></CourseDetail>
+          </PrivetRoute>
+        ),
         loader: ({ params }) =>
           fetch(`https://freelearning.vercel.app/courses/${params.id}`),
       },
