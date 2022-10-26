@@ -42,7 +42,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/checkout",
-        element: <Cheackout></Cheackout>,
+        element: (
+          <PrivetRoute>
+            <Cheackout></Cheackout>
+          </PrivetRoute>
+        ),
       },
       {
         path: "/register",

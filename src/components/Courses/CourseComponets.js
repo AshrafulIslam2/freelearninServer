@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const CourseComponets = (params) => {
   const { course } = params;
@@ -17,7 +18,7 @@ const CourseComponets = (params) => {
             {name.length > 10 ? name.slice(0, 30) : name}
           </h2>
           <button className="bg-pink-600 text-white py-3 px-2 rounded-xl font-mono font-bold leading-loose tracking-normal mt-3">
-            Select Course
+            <Link to={`${course.id}`}>Select Course</Link>
           </button>
         </div>
       </div>
