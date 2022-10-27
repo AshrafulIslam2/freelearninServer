@@ -81,20 +81,23 @@ const Header = () => {
               <div className="absolute inset-y-0 left-0 w-4 h-4 m-1 rounded-full shadow peer-checked:right-0 peer-checked:left-auto bg-gray-800"></div>
             </span>
           </label>
-          {Duser?.email ? (
+          {Duser?.uid ? (
             <button className="btn btn-ghost btn-circle mr-4">
               <Link to="/login" onClick={logoutHandeler}>
                 Logout
               </Link>
             </button>
           ) : (
-            <button className="btn btn-ghost btn-circle mr-2">
-              <Link to="/login">Login</Link>
-            </button>
+            <>
+              <button className="btn btn-ghost btn-circle mr-2">
+                <Link to="/login">Login</Link>
+              </button>
+              <button className="btn btn-ghost btn-circle  mr-3">
+                <Link to="/register">Register</Link>
+              </button>
+            </>
           )}
-          <button className="btn btn-ghost btn-circle  mr-3">
-            <Link to="/register">Register</Link>
-          </button>
+
           <Link to="/profile">
             {Duser?.photoURL ? (
               <>

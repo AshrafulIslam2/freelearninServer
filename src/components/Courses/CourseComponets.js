@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 const CourseComponets = (params) => {
   const { course } = params;
   const name = course.name;
+
   return (
     <div className="">
       <div className="max-w-xs p-6 rounded-md shadow-md dark:bg-gray-900 dark:text-gray-50">

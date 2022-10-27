@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContexts } from "../UserContext/UserContext";
 
 const Login = () => {
-  const { loginUser, GoogleLogin } = useContext(AuthContexts);
+  const { loginUser, GoogleLogin, GitHubLogin } = useContext(AuthContexts);
   const location = useLocation();
   const from = location.state?.from?.pathname || "/home";
   const [erorr, SetErorr] = useState("");
@@ -26,6 +26,19 @@ const Login = () => {
   };
   const GoogleHandler = () => {
     GoogleLogin()
+      .then((result) => {
+        // The signed-in user info.
+        const user = result.user;
+        console.log(user);
+        navigate(from, { replace: true });
+        // ...
+      })
+      .catch((error) => {
+        SetErorr(error.message);
+      });
+  };
+  const GithubHandler = () => {
+    GitHubLogin()
       .then((result) => {
         // The signed-in user info.
         const user = result.user;
@@ -101,7 +114,11 @@ const Login = () => {
               <path d="M16.318 13.714v5.484h9.078c-0.37 2.354-2.745 6.901-9.078 6.901-5.458 0-9.917-4.521-9.917-10.099s4.458-10.099 9.917-10.099c3.109 0 5.193 1.318 6.38 2.464l4.339-4.182c-2.786-2.599-6.396-4.182-10.719-4.182-8.844 0-16 7.151-16 16s7.156 16 16 16c9.234 0 15.365-6.49 15.365-15.635 0-1.052-0.115-1.854-0.255-2.651z"></path>
             </svg>
           </button>
-          <button aria-label="Log in with GitHub" className="p-3 rounded-sm">
+          <button
+            aria-label="Log in with GitHub"
+            className="p-3 rounded-sm"
+            onClick={GithubHandler}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 32 32"

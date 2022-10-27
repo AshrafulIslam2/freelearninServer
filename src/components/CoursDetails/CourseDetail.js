@@ -10,7 +10,7 @@ const CourseDetail = () => {
   const PdfDownloder = (name, pname) => {
     console.log();
     const doc = new jsPDF();
-    doc.text(` course name :${name} Publisher Name: ${pname}  `, 10, 10);
+    doc.text(` course name :${name} \n Publisher Name: ${pname}  `, 10, 10);
     doc.save("course.pdf");
   };
   return (
